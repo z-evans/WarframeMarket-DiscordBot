@@ -10,14 +10,18 @@ const command: Command = {
   description: 'Check your watch list',
   async execute(msg, args, warframeItems) {
 
-    const data = (await WatchListManager.getByUserId(msg.author.id)).map(item => { return WarframeItemManager.urlToName(warframeItems, item.name) });
+    const data = await WatchListManager.getByUserId(msg.author.id);
 
-    msg.channel.send({
-      embed: {
-        title: `${msg.author.username}'s Watchlist`,
-        description: data.join("\n")
-      }
-    });
+    if (data != undefined && data.length > 0) {
+      const content = data.map(item => { return WarframeItemManager.urlToName(warframeItems, item.name) })
+      msg.channel.send({
+        embed: {
+          title: `${msg.author.username}'s Watchlist`,
+          description: content.join("\n")
+        }
+      });
+    }
+
 
   },
 };
