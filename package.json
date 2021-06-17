@@ -1,0 +1,28 @@
+{
+    "name": "discordbot-ts",
+    "version": "1.0.5",
+    "description": "Simple discord bot",
+    "main": "dist/index.js",
+    "scripts": {
+        "watch": "node_modules/.bin/tsc -w",
+        "build": "node_modules/.bin/tsc",
+        "start": "ts-node src/app.ts"
+    },
+    "keywords": [],
+    "author": "Zack",
+    "devDependencies": {
+        "@types/mysql": "^2.15.18",
+        "@types/node": "^8.5.2",
+        "@types/node-fetch": "^1.6.7",
+        "@types/superagent": "^4.1.11",
+        "ts-node": "^10.0.0",
+        "tslint": "^5.8.0",
+        "typescript": "^2.6.2"
+    },
+    "dependencies": {
+        "discord.js": "^11.2.1",
+        "mysql": "^2.18.1",
+        "node-fetch": "^1.7.3",
+        "superagent": "^6.1.0"
+    }
+}
