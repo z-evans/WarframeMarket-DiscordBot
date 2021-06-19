@@ -24,8 +24,10 @@ class WarframeMarketManager {
       }
     });
 
+    const sortedOrders = orders.sort((a, b) => a.platinum - b.platinum);
+
     return {
-      orders,
+      sortedOrders,
       most
     };
 
