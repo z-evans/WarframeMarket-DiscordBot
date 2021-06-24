@@ -79,6 +79,7 @@ class WatchListManager {
   getByUserId(userid: string): Promise<WatchList[]> {
     return new Promise(resolve => {
       this.conn.query('SELECT * FROM watchlist WHERE userid = ?', [userid], (err, result) => {
+        if (err) throw err;
         resolve(result as WatchList[]);
       });
     });
@@ -87,6 +88,7 @@ class WatchListManager {
   getRecord(item: string, userid: string): Promise<WatchList> {
     return new Promise(resolve => {
       this.conn.query('SELECT * FROM watchlist WHERE name = ? AND userid = ?', [item, userid], (err, result) => {
+        if (err) throw err;
         resolve(result[0] as WatchList);
       });
     });
@@ -95,6 +97,7 @@ class WatchListManager {
   getAll(): Promise<WatchList[]> {
     return new Promise(resolve => {
       this.conn.query('SELECT * FROM watchlist', (err, result) => {
+        if (err) throw err;
         resolve(result as WatchList[]);
       });
     });
