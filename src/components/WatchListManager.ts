@@ -28,8 +28,8 @@ class WatchListManager {
       for (const e of filteredList) {
         const marketData = await WarframeMarketManager.check(e.name);
 
-        if (marketData.orders != undefined) {
-          const lowest = marketData.orders.sort((a, b) => a.platinum - b.platinum)[0];
+        if (marketData.sortedOrders != undefined) {
+          const lowest = marketData.sortedOrders[0];
           orderData.push({
             itemName: WarframeItemManager.urlToName(warframeItems, e.name),
             avgPrice: marketData.most,
