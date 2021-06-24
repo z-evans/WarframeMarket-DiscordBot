@@ -33,7 +33,9 @@ class WatchListManager {
       }
     }
 
-    const message = orderData.map(e => { return e.lowPrice ? `${e.itemName} lowest price is ${e.lowPrice} compared to ${e.avgPrice}` : `${e.itemName} lowest and average price is ${e.avgPrice}` });
+    const message = orderData
+      .sort((a, b) => { return a.itemName.localeCompare(b.itemName) })
+      .map(e => { return e.lowPrice ? `**${e.itemName}** lowest price is ${e.lowPrice} compared to ${e.avgPrice}` : `${e.itemName} lowest and average price is ${e.avgPrice}` });
 
     if (message && message.length > 0) {
       const data = {
