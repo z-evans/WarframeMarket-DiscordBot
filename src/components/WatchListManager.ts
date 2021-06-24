@@ -25,16 +25,15 @@ class WatchListManager {
       const marketData = await WarframeMarketManager.check(item);
 
       if (marketData.sortedOrders != undefined) {
-        const lowest = marketData.sortedOrders[0];
         orderData.push({
           itemName: WarframeItemManager.urlToName(warframeItems, item),
           avgPrice: marketData.most,
-          lowPrice: lowest.platinum
+          lowPrice: marketData.sortedOrders[0] ? marketData.sortedOrders[0].platinum : undefined
         });
       }
     }
 
-    const message = orderData.map(e => { return `${e.itemName} lowest price is ${e.lowPrice} compared to ${e.avgPrice}` });
+    const message = orderData.map(e => { return e.lowPrice ? `${e.itemName} lowest price is ${e.lowPrice} compared to ${e.avgPrice}` : `${e.itemName} lowest and average price is ${e.avgPrice}` });
 
     if (message && message.length > 0) {
       const data = {

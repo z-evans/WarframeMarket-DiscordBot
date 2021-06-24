@@ -46,6 +46,6 @@ export interface WarframeItem {
 
 export interface WatchListNotification {
   itemName: string;
-  lowPrice: number;
+  lowPrice: number | undefined;
   avgPrice: number;
 }
