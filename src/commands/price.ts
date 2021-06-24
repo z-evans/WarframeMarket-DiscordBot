@@ -6,7 +6,7 @@ import { URLs } from "../config/Urls";
 import { Command } from "../interfaces/Command";
 
 const command: Command = {
-  name: 'price',
+  name: 'Price',
   description: 'Check the price of a warframe item.',
   execute(msg, args, warframeItems) {
 
@@ -45,31 +45,61 @@ const command: Command = {
           message.awaitReactions(filter, { max: 1, time: 30000, errors: ['time'] })
             .then(async collected => {
               const reaction = collected.first();
-
+              let data;
               switch (reaction.emoji.name) {
                 case '1️⃣':
-                  let data = await WarframeMarketManager.check(itemResult[0].url_name);
-                  msg.reply(`${itemResult[0].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  data = await WarframeMarketManager.check(itemResult[0].url_name);
+
+                  if (data.sortedOrders[0]) {
+                    msg.reply(`${itemResult[0].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  } else {
+                    msg.reply(`${itemResult[0].item_name} lowest and average price is ${data.most}.`);
+                  }
+
                   message.delete();
                   break;
                 case '2️⃣':
                   data = await WarframeMarketManager.check(itemResult[1].url_name);
-                  msg.reply(`${itemResult[1].item_name} lowest price is ${data.sortedOrders[1].platinum}, while the average price is ${data.most}.`);
+
+                  if (data.sortedOrders[0]) {
+                    msg.reply(`${itemResult[1].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  } else {
+                    msg.reply(`${itemResult[1].item_name} lowest and average price is ${data.most}.`);
+                  }
+
                   message.delete();
                   break;
                 case '3️⃣':
                   data = await WarframeMarketManager.check(itemResult[2].url_name);
-                  msg.reply(`${itemResult[2].item_name} lowest price is ${data.sortedOrders[2].platinum}, while the average price is ${data.most}.`);
+
+                  if (data.sortedOrders[0]) {
+                    msg.reply(`${itemResult[2].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  } else {
+                    msg.reply(`${itemResult[2].item_name} lowest and average price is ${data.most}.`);
+                  }
+
                   message.delete();
                   break;
                 case '4️⃣':
                   data = await WarframeMarketManager.check(itemResult[3].url_name);
-                  msg.reply(`${itemResult[3].item_name} lowest price is ${data.sortedOrders[3].platinum}, while the average price is ${data.most}.`);
+
+                  if (data.sortedOrders[0]) {
+                    msg.reply(`${itemResult[2].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  } else {
+                    msg.reply(`${itemResult[2].item_name} lowest and average price is ${data.most}.`);
+                  }
+
                   message.delete();
                   break;
                 case '5️⃣':
                   data = await WarframeMarketManager.check(itemResult[4].url_name);
-                  msg.reply(`${itemResult[4].item_name} lowest price is ${data.sortedOrders[4].platinum}, while the average price is ${data.most}.`);
+
+                  if (data.sortedOrders[0]) {
+                    msg.reply(`${itemResult[2].item_name} lowest price is ${data.sortedOrders[0].platinum}, while the average price is ${data.most}.`);
+                  } else {
+                    msg.reply(`${itemResult[2].item_name} lowest and average price is ${data.most}.`);
+                  }
+
                   message.delete();
                   break;
               }

@@ -1,7 +1,7 @@
 import { Command } from "../interfaces/Command";
 
 const command: Command = {
-  name: 'ping',
+  name: 'Ping',
   description: 'Simple Pong reply',
   execute(msg, args) {
 

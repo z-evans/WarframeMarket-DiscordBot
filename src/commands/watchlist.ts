@@ -6,7 +6,7 @@ import { URLs } from "../config/Urls";
 import { Command } from "../interfaces/Command";
 
 const command: Command = {
-  name: 'watchlist',
+  name: 'Watchlist',
   description: 'Check your watch list',
   async execute(msg, args, warframeItems) {
 

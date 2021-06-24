@@ -18,9 +18,41 @@ class WatchListManager {
   async process(warframeItems: WarframeItem[]) {
 
     const list = await this.getAll();
-    const userList = new Set(list.map(item => { return item.userid }));
+    const itemList = new Set(list.map(item => { return item.name }));
 
-    userList.forEach(async user => {
+    let orderData: WatchListNotification[] = [];
+    for (const item of itemList) {
+      const marketData = await WarframeMarketManager.check(item);
+
+      if (marketData.sortedOrders != undefined) {
+        const lowest = marketData.sortedOrders[0];
+        orderData.push({
+          itemName: WarframeItemManager.urlToName(warframeItems, item),
+          avgPrice: marketData.most,
+          lowPrice: lowest.platinum
+        });
+      }
+    }
+
+    const message = orderData.map(e => { return `${e.itemName} lowest price is ${e.lowPrice} compared to ${e.avgPrice}` });
+
+    if (message && message.length > 0) {
+      const data = {
+        "username": "",
+        "avatar_url": "",
+        "embeds": [{
+          "title": "Watch List:",
+          "description": message.join("\n\n")
+        }],
+        "components": []
+      }
+
+      await post(URLs.API.WebHook).send(data);
+    }
+
+    // const userList = new Set(list.map(item => { return item.userid }));
+
+    /*userList.forEach(async user => {
 
       const filteredList = list.filter(e => { return e.userid == user });
 
@@ -44,7 +76,6 @@ class WatchListManager {
         const data = {
           "username": "",
           "avatar_url": "",
-          "content": `<@${user}>`,
           "embeds": [{
             "title": "Watch List:",
             "description": message.join("\n\n")
@@ -54,7 +85,7 @@ class WatchListManager {
 
         await post(URLs.API.WebHook).send(data);
       }
-    });
+    });*/
 
   }
 

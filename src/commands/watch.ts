@@ -5,7 +5,7 @@ import { URLs } from "../config/Urls";
 import { Command } from "../interfaces/Command";
 
 const command: Command = {
-  name: 'watch',
+  name: 'Watch',
   description: 'Adds item to watch list',
   execute(msg, args, warframeItems) {
 

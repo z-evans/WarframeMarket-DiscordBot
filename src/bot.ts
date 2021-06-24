@@ -1,21 +1,21 @@
-const Discord = require('discord.js');
-import { Message } from 'discord.js';
+import Discord, { Message } from 'discord.js';
 import fs from 'fs';
 import WarframeMarketManager from './components/WarframeMarketManager';
 import WatchListManager from './components/WatchListManager';
 
 import config from './config/bot.json';
+import { Command } from './interfaces/Command';
 import { WarframeItem } from './interfaces/WarframeMarketApi';
 
 const client = new Discord.Client();
 const log = console.log;
 
 // Command Setup
-client.commands = new Discord.Collection();
+const commands: Discord.Collection<string, Command> = new Discord.Collection();
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'));
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`);
-  client.commands.set(command.name, command);
+  const command: Command = require(`./commands/${file}`);
+  commands.set(command.name.toLowerCase(), command);
 }
 
 let warframeItems: WarframeItem[];
@@ -38,10 +38,10 @@ client.on('message', (msg: Message) => {
   const command = args.shift()!.toLowerCase();
 
   if (!msg.content.startsWith(prefix) || msg.author.bot) return;
-  if (!client.commands.has(command)) return;
+  if (!commands.has(command)) return;
 
   try {
-    client.commands.get(command)!.execute(msg, args, warframeItems);
+    commands.get(command)!.execute(msg, args, warframeItems, commands);
   } catch (error) {
     log(error);
   }
