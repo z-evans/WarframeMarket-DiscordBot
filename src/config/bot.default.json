@@ -1,0 +1,9 @@
+{
+  "token": "NzExMzY5Mzg0NzY0ODk5MzM4.XsCAXQ.xwOXAhXn8SpLNsHGiScGAi5lZCw",
+  "database": {
+    "host": "localhost",
+    "user": "root",
+    "password": "",
+    "database": "warframe"
+  }
+}
