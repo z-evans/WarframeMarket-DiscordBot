@@ -1,5 +1,5 @@
 {
-  "token": "NzExMzY5Mzg0NzY0ODk5MzM4.XsCAXQ.xwOXAhXn8SpLNsHGiScGAi5lZCw",
+  "token": "bot-token",
   "database": {
     "host": "localhost",
     "user": "root",
