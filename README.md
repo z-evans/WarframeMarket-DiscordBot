@@ -1,4 +1,4 @@
-##Simple Warframe Market Discord Bot
+# Simple Warframe Market Discord Bot
 A discord bot made for tracking the warframe market for best prices.
 
 ### Features
